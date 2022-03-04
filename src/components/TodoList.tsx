@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {task} from "../App";
 import {Task} from "./Task";
 
@@ -6,13 +6,10 @@ type propTypes = {
     tasks: task[]
     todoListTitle: string
     taskListID: string
-    addTask: (todoListID: string, taskID: string, title: string) => void
+    addTask: (todoListID: string, title: string) => void
 }
 
 export const TodoList: React.FC<propTypes> = (props) => {
-    const addTask = (taskID: string, title: string) => {
-        props.addTask(props.taskListID, taskID, title)
-    }
 
     const [inputText, setInputText] = useState('')
     const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +18,13 @@ export const TodoList: React.FC<propTypes> = (props) => {
     }
 
     const addTaskHandler = () => {
+        props.addTask(props.taskListID, inputText)
+        setInputText('')
+    }
+
+    const onInputEnterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        e.key === "Enter" && addTaskHandler()
+
 
     }
 
@@ -29,7 +33,8 @@ export const TodoList: React.FC<propTypes> = (props) => {
             <div>{props.todoListTitle}</div>
             <input type="text"
                    value={inputText}
-                   onChange={onInputChangeHandler}/>
+                   onChange={onInputChangeHandler}
+                   onKeyDown={onInputEnterKeyPress}/>
             <button children={'+'}
                     onClick={addTaskHandler}/>
             <div>

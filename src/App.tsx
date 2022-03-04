@@ -17,10 +17,6 @@ export type task = {
     isDone: boolean
 }
 
-//reducers
-const addTask = (todoListID: string, taskID: string, title: string) => {
-    console.log(title)
-}
 
 function App() {
     const [todoLists, setTodoLists] = useState<todoList[]>([
@@ -60,6 +56,17 @@ function App() {
             }
         ]
     )
+
+    //reducers
+    const addTask = (todoListID: string, title: string) => {
+        console.log(title)
+        setTodoLists(todoLists.map(el =>
+                el.id === todoListID
+                    ? {...el, tasks: [{id: v1(), title, isDone: false}, ...el.tasks]}
+                    : el
+            )
+        )
+    }
 
     return (
         <div>
