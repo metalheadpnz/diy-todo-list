@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import {task} from "../App";
+import {filterType, task} from "../App";
 import {Task} from "./Task";
 
 type propTypes = {
@@ -24,9 +24,14 @@ export const TodoList: React.FC<propTypes> = (props) => {
 
     const onInputEnterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
         e.key === "Enter" && addTaskHandler()
-
-
     }
+
+    const filteredTasks = (filter:filterType) => {
+       return  props.tasks.map(el => el)
+    }
+
+    console.log(filteredTasks('active'))
+
 
     return (
         <div className='todoList'>

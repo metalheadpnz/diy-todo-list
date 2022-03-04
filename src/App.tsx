@@ -37,23 +37,23 @@ function App() {
                     }
                 ]
             },
-            {
-                id: v1(),
-                title: "What to Listen",
-                filter: 'all',
-                tasks: [
-                    {
-                        id: v1(),
-                        title: 'Metallica',
-                        isDone: true
-                    },
-                    {
-                        id: v1(),
-                        title: 'Offspring',
-                        isDone: false
-                    }
-                ]
-            }
+            // {
+            //     id: v1(),
+            //     title: "What to Listen",
+            //     filter: 'all',
+            //     tasks: [
+            //         {
+            //             id: v1(),
+            //             title: 'Metallica',
+            //             isDone: true
+            //         },
+            //         {
+            //             id: v1(),
+            //             title: 'Offspring',
+            //             isDone: false
+            //         }
+            //     ]
+            // }
         ]
     )
 
