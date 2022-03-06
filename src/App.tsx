@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {v1} from "uuid";
 import {TodoList} from "./components/TodoList";
-import {CreateTodoListForm} from "./components/CreateTodoListForm";
+import {CreateTodoList} from "./components/CreateTodoList";
 
 //types
 type todoList = {
@@ -109,7 +109,7 @@ function App() {
 
     return (
         <div className='appWrap'>
-            <CreateTodoListForm
+            <CreateTodoList
                 addNewTodoList={addNewTodoList}/>
             <div className={'todoListsWrapper'}>
                 {todoLists.map(el =>

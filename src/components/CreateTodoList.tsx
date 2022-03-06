@@ -1,11 +1,11 @@
 import React from 'react';
-import {AddItem} from "./AddItem";
+import {Input} from "./Input";
 
 type propTypes = {
     addNewTodoList: (newListTitle: string) => void
 }
 
-export const CreateTodoListForm: React.FC<propTypes> = (props) => {
+export const CreateTodoList: React.FC<propTypes> = (props) => {
 
     function addList (inputText: string) {
         props.addNewTodoList(inputText)
@@ -13,8 +13,8 @@ export const CreateTodoListForm: React.FC<propTypes> = (props) => {
 
     return (
         <div className={'CreateTodoListForm'}>
-            <AddItem buttonText={'addList'}
-            callBack={addList}/>
+            <Input buttonText={'addList'}
+                   callBack={addList}/>
         </div>
     );
 };

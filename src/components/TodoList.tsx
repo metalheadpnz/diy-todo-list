@@ -2,7 +2,7 @@ import React from 'react';
 import {filterType, task} from "../App";
 import {Task} from "./Task";
 import {FilterButtons} from "./FilterButtons";
-import {AddItem} from "./AddItem";
+import {Input} from "./Input";
 
 type propTypes = {
     tasks: task[]
@@ -42,8 +42,8 @@ export const TodoList: React.FC<propTypes> = (props) => {
             <h3>{props.todoListTitle}
                 <button onClick={deleteTodoListHandler}>x</button>
             </h3>
-            <AddItem buttonText={'add'}
-                     callBack={addTask}/>
+            <Input buttonText={'add'}
+                   callBack={addTask}/>
 
             <div>
                 {filteredTasks.map(task =>

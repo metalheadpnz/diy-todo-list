@@ -5,7 +5,7 @@ type propTypes = {
     callBack: (inputText: string) => void
 }
 
-export const AddItem: React.FC<propTypes> = (props) => {
+export const Input: React.FC<propTypes> = (props) => {
     const [inputValue, setInputValue] = useState('')
 
     function onInputChangeHandler(e: ChangeEvent<HTMLInputElement>) {
