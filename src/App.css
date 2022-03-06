@@ -1,4 +1,21 @@
-.todoList{
-    display: inline-block;
-    margin: 0 50px;
+.todoList {
+    margin: 0 20px;
+    min-width: 250px;
+}
+
+.todoListsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.appWrap {
+
+}
+
+.CreateTodoListForm {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
 }

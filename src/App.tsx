@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {v1} from "uuid";
 import {TodoList} from "./components/TodoList";
+import {CreateTodoListForm} from "./components/CreateTodoListForm";
 
 //types
 type todoList = {
@@ -34,32 +35,52 @@ function App() {
                         id: v1(),
                         title: 'React',
                         isDone: false
+                    },
+                    {
+                        id: v1(),
+                        title: 'Redux',
+                        isDone: false
+                    },
+                    {
+                        id: v1(),
+                        title: 'MobX',
+                        isDone: false
                     }
                 ]
             },
-            // {
-            //     id: v1(),
-            //     title: "What to Listen",
-            //     filter: 'all',
-            //     tasks: [
-            //         {
-            //             id: v1(),
-            //             title: 'Metallica',
-            //             isDone: true
-            //         },
-            //         {
-            //             id: v1(),
-            //             title: 'Offspring',
-            //             isDone: false
-            //         }
-            //     ]
-            // }
+            {
+                id: v1(),
+                title: "What to Listen",
+                filter: 'all',
+                tasks: [
+                    {
+                        id: v1(),
+                        title: 'Metallica',
+                        isDone: true
+                    },
+                    {
+                        id: v1(),
+                        title: 'Offspring',
+                        isDone: false
+                    },
+                    {
+                        id: v1(),
+                        title: 'Slayer',
+                        isDone: false
+                    },
+                    {
+                        id: v1(),
+                        title: 'Bon Jovi',
+                        isDone: false
+                    }
+                ]
+            }
         ]
     )
 
     //reducers
     const addTask = (todoListID: string, title: string) => {
-        console.log(title)
+        // console.log(title)
         setTodoLists(todoLists.map(el =>
                 el.id === todoListID
                     ? {...el, tasks: [{id: v1(), title, isDone: false}, ...el.tasks]}
@@ -68,18 +89,43 @@ function App() {
         )
     }
 
-    return (
-        <div>
-            {todoLists.map(el =>
-                <TodoList
-                    key={el.id}
-                    taskListID={el.id}
-                    tasks={el.tasks}
-                    todoListTitle={el.title}
-                    addTask={addTask}
-                />
-            )}
+    function addNewTodoList (newListTitle: string) {
+        setTodoLists([...todoLists, {id: v1(), title: newListTitle, filter: 'all', tasks: []}])
+    }
 
+    function changeFilter(todoListID: string, filter: filterType) {
+        console.log(filter)
+        setTodoLists(todoLists.map(el =>
+                el.id === todoListID
+                    ? {...el, filter}
+                    : el
+            )
+        )
+    }
+
+    function deleteTodoList(todoListID: string) {
+        setTodoLists(todoLists.filter(el => el.id !== todoListID))
+    }
+
+    return (
+        <div className='appWrap'>
+            <CreateTodoListForm
+                addNewTodoList={addNewTodoList}/>
+            <div className={'todoListsWrapper'}>
+                {todoLists.map(el =>
+
+                    <TodoList
+                        key={el.id}
+                        taskListID={el.id}
+                        tasks={el.tasks}
+                        todoListTitle={el.title}
+                        filter={el.filter}
+                        addTask={addTask}
+                        changeFilter={changeFilter}
+                        deleteTodoList={deleteTodoList}
+                    />
+                )}
+            </div>
         </div>
     );
 }
