@@ -1,25 +1,20 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
+import {AddItem} from "./AddItem";
 
 type propTypes = {
     addNewTodoList: (newListTitle: string) => void
 }
 
 export const CreateTodoListForm: React.FC<propTypes> = (props) => {
-    const [inputText, setInputText] = useState('')
 
-    const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputText(e.currentTarget.value)
-    }
-    const addButtonHandler = () => {
+    function addList (inputText: string) {
         props.addNewTodoList(inputText)
     }
 
     return (
         <div className={'CreateTodoListForm'}>
-            <input type="text"
-                   value={inputText}
-                   onChange={onInputChangeHandler}/>
-            <button onClick={addButtonHandler}>add</button>
+            <AddItem buttonText={'addList'}
+            callBack={addList}/>
         </div>
     );
 };

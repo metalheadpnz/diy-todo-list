@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import React from 'react';
 import {filterType, task} from "../App";
 import {Task} from "./Task";
 import {FilterButtons} from "./FilterButtons";
@@ -16,23 +16,12 @@ type propTypes = {
 
 export const TodoList: React.FC<propTypes> = (props) => {
 
-    const [inputText, setInputText] = useState('')
-    const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputText(e.currentTarget.value)
-        e.stopPropagation()
-    }
-
-    const addTaskHandler = () => {
-        props.addTask(props.taskListID, inputText)
-        setInputText('')
-    }
-
-    const onInputEnterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === "Enter" && addTaskHandler()
-    }
-
     function deleteTodoListHandler() {
         props.deleteTodoList(props.taskListID)
+    }
+
+    function addTask (inputText: string) {
+        props.addTask(props.taskListID, inputText)
     }
 
     const filteredTasks = (() => {
@@ -53,13 +42,9 @@ export const TodoList: React.FC<propTypes> = (props) => {
             <h3>{props.todoListTitle}
                 <button onClick={deleteTodoListHandler}>x</button>
             </h3>
-            <AddItem/>
-            <input type="text"
-                   value={inputText}
-                   onChange={onInputChangeHandler}
-                   onKeyDown={onInputEnterKeyPress}/>
-            <button children={'+'}
-                    onClick={addTaskHandler}/>
+            <AddItem buttonText={'add'}
+                     callBack={addTask}/>
+
             <div>
                 {filteredTasks.map(task =>
                     <Task
