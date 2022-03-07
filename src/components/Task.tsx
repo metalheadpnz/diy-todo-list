@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {task} from "../App";
+import ModalWindow from "./common/ModalWindow";
 
 type propTypes = {
     task: task
@@ -9,13 +10,18 @@ type propTypes = {
 }
 export const Task: React.FC<propTypes> = ({task, changeStatus, todoListID, deleteTask}) => {
     const {title, isDone, id} = task
+    const [modalWindow, setModalWindow] = useState(false)
 
     function onCheckBoxChange() {
         changeStatus(todoListID, id, isDone)
     }
 
+
+
     function deleteTaskButtonHandler() {
-        deleteTask(todoListID, id)
+
+        setModalWindow(true)
+        // deleteTask(todoListID, id)
     }
 
     return (
@@ -30,6 +36,8 @@ export const Task: React.FC<propTypes> = ({task, changeStatus, todoListID, delet
                 children={<>&#10060;</>}
                 onClick={deleteTaskButtonHandler}
             />
+            {modalWindow && <ModalWindow message={`Delete ${title}`}
+                                         callBack={deleteTaskButtonHandler}/>}
         </div>
     );
 };

@@ -3,6 +3,7 @@ import './App.css';
 import {v1} from "uuid";
 import {TodoList} from "./components/TodoList";
 import {CreateTodoList} from "./components/CreateTodoList";
+import ModalWindow from "./components/common/ModalWindow";
 
 //types
 type todoList = {
