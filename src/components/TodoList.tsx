@@ -12,6 +12,8 @@ type propTypes = {
     addTask: (todoListID: string, title: string) => void
     changeFilter: (todoListID: string, filter: filterType) => void
     deleteTodoList: (todoListID: string) => void
+    changeStatus: (todoListID:string, taskID:string, isDone:boolean)=> void
+    deleteTask: (todoListID:string, taskID:string) => void
 }
 
 export const TodoList: React.FC<propTypes> = (props) => {
@@ -50,6 +52,9 @@ export const TodoList: React.FC<propTypes> = (props) => {
                     <Task
                         key={task.id}
                         task={task}
+                        changeStatus={props.changeStatus}
+                        todoListID={props.taskListID}
+                        deleteTask={props.deleteTask}
                     />)}
             </div>
             <FilterButtons
