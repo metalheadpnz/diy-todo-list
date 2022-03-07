@@ -94,7 +94,7 @@ function App() {
     }
 
     function changeFilter(todoListID: string, filter: filterType) {
-        console.log(filter)
+
         setTodoLists(todoLists.map(el =>
                 el.id === todoListID
                     ? {...el, filter}

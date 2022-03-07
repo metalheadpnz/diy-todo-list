@@ -19,3 +19,35 @@
     display: flex;
     justify-content: center;
 }
+
+.active {
+    background-color: cyan;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    width: 215px;
+}
+
+.taskListWrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0 10px 0;
+}
+
+.filterButtonsWrap{
+    display: flex;
+    justify-content: center;
+}
+
+.inputTask{
+    display: flex;
+    justify-content: center;
+}
+
+.h3{
+    display: flex;
+    justify-content: center;
+}

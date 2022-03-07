@@ -4,6 +4,7 @@ import {filterType} from "../App";
 type propTypes = {
     changeFilter: (taskListID: string, filter: filterType) => void
     taskListID: string
+    filter: filterType
 }
 
 export const FilterButtons: React.FC<propTypes> = (props) => {
@@ -13,10 +14,11 @@ export const FilterButtons: React.FC<propTypes> = (props) => {
         props.changeFilter(props.taskListID, filter)
     }
     return (
-        <div>
+        <div className={'filterButtonsWrap'}>
             {
                 buttons.map((b, num) =>
                     <button
+                        className={b === props.filter ? 'active' : ''}
                         children={b.toUpperCase()}
                         key={num}
                         onClick={() => buttonHandler(b)}/>

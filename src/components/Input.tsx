@@ -1,45 +1,61 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import s from './Input.module.css'
 
 type propTypes = {
     buttonText?: any
     callBack: (inputText: string) => void
+    wrapClassName?: string
 }
 
 export const Input: React.FC<propTypes> = (props) => {
     const [inputValue, setInputValue] = useState('')
+    const [error, setError] = useState(false)
 
     function onInputChangeHandler(e: ChangeEvent<HTMLInputElement>) {
+        setError(false)
         setInputValue(e.currentTarget.value)
         e.stopPropagation()
     }
 
     function onKeyEnterDownHandler(e: KeyboardEvent<HTMLInputElement>) {
-        e.key === "Enter" && sendInputValueAndClearInput();
+        e.key === "Enter" && CheckInputSendValueAndClearInput();
         e.stopPropagation()
     }
 
-    function sendInputValueAndClearInput() {
+    function CheckInputSendValueAndClearInput() {
         if (inputValue.trim()) {
             props.callBack(inputValue)
             setInputValue('')
         } else {
-            console.log('fail')
+            setError(true)
         }
     }
 
     function onButtonClickHandler() {
-        sendInputValueAndClearInput()
+        CheckInputSendValueAndClearInput()
     }
+
+    function onSelectHandler() {
+        setError(false)
+    }
+
+    const totalInputWrapClassName = error ? s.error : ''
+    const placeholder = error ? 'Field is require' : ''
 
 
     return (
-        <div>
-            <input type="text"
+        <div className={props.wrapClassName}>
+            <input placeholder={placeholder}
+                   className={totalInputWrapClassName}
+                   type="text"
                    value={inputValue}
                    onChange={onInputChangeHandler}
-                   onKeyDown={onKeyEnterDownHandler}/>
+                   onKeyDown={onKeyEnterDownHandler}
+                   onSelect={onSelectHandler}/>
             <button children={props.buttonText || "+"}
-                    onClick={onButtonClickHandler}/>
+                    onClick={onButtonClickHandler}
+                    disabled={error}/>
+
         </div>
     );
 };

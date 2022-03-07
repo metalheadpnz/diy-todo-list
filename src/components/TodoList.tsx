@@ -12,8 +12,8 @@ type propTypes = {
     addTask: (todoListID: string, title: string) => void
     changeFilter: (todoListID: string, filter: filterType) => void
     deleteTodoList: (todoListID: string) => void
-    changeStatus: (todoListID:string, taskID:string, isDone:boolean)=> void
-    deleteTask: (todoListID:string, taskID:string) => void
+    changeStatus: (todoListID: string, taskID: string, isDone: boolean) => void
+    deleteTask: (todoListID: string, taskID: string) => void
 }
 
 export const TodoList: React.FC<propTypes> = (props) => {
@@ -22,7 +22,7 @@ export const TodoList: React.FC<propTypes> = (props) => {
         props.deleteTodoList(props.taskListID)
     }
 
-    function addTask (inputText: string) {
+    function addTask(inputText: string) {
         props.addTask(props.taskListID, inputText)
     }
 
@@ -41,13 +41,14 @@ export const TodoList: React.FC<propTypes> = (props) => {
 
     return (
         <div className='todoList'>
-            <h3>{props.todoListTitle}
-                <button onClick={deleteTodoListHandler}>x</button>
+            <h3 className={'h3'}>{props.todoListTitle}&nbsp;
+                <button onClick={deleteTodoListHandler}>&#9762;</button>
             </h3>
             <Input buttonText={'add'}
-                   callBack={addTask}/>
+                   callBack={addTask}
+                   wrapClassName={'inputTask'}/>
 
-            <div>
+            <div className={'taskListWrap'}>
                 {filteredTasks.map(task =>
                     <Task
                         key={task.id}
@@ -60,6 +61,7 @@ export const TodoList: React.FC<propTypes> = (props) => {
             <FilterButtons
                 changeFilter={props.changeFilter}
                 taskListID={props.taskListID}
+                filter={props.filter}
             />
         </div>
     );

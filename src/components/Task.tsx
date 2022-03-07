@@ -19,13 +19,15 @@ export const Task: React.FC<propTypes> = ({task, changeStatus, todoListID, delet
     }
 
     return (
-        <div>
-            <input type="checkbox" checked={isDone} onChange={onCheckBoxChange}/>
-            <span
-                children={title}
-            />
+        <div className={'task'}>
+            <span>
+                <input type="checkbox" checked={isDone} onChange={onCheckBoxChange}/>
+                <span
+                    children={title}
+                    style={isDone ? {textDecoration: "line-through"} : {}}/>
+            </span>
             <button
-                children={'x'}
+                children={<>&#10060;</>}
                 onClick={deleteTaskButtonHandler}
             />
         </div>
