@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './ModalWindow.module.css'
+
 type propTypes = {
     message: string
-    callBack: any
+    callBack: (conform: boolean) => void
 }
 
 const ModalWindow: React.FC<propTypes> = (props) => {
@@ -11,8 +12,12 @@ const ModalWindow: React.FC<propTypes> = (props) => {
             <div className={s.modalContent}>
                 <span className={s.text}>{props.message}</span>
                 <div>
-                    <button>YES</button>
-                    <button>NO</button>
+                    <button className={s.yes}
+                            onClick={() => props.callBack(true)}>YES
+                    </button>
+                    <button className={s.no}
+                            onClick={() => props.callBack(false)}>NO
+                    </button>
                 </div>
 
             </div>

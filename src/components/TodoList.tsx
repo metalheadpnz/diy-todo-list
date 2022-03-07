@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {filterType, task} from "../App";
 import {Task} from "./Task";
 import {FilterButtons} from "./FilterButtons";
 import {Input} from "./Input";
+import ModalWindow from "./common/ModalWindow";
 
 type propTypes = {
     tasks: task[]
@@ -17,9 +18,17 @@ type propTypes = {
 }
 
 export const TodoList: React.FC<propTypes> = (props) => {
+    const [modalWindow, setModalWindow] = useState(false)
 
-    function deleteTodoListHandler() {
-        props.deleteTodoList(props.taskListID)
+    function deleteTodoListRequest() {
+        console.log('request')
+        setModalWindow(true)
+        // props.deleteTodoList(props.taskListID)
+    }
+
+    function conformDelete(conform: boolean) {
+        conform && props.deleteTodoList(props.taskListID)
+        setModalWindow(false)
     }
 
     function addTask(inputText: string) {
@@ -42,7 +51,7 @@ export const TodoList: React.FC<propTypes> = (props) => {
     return (
         <div className='todoList'>
             <h3 className={'h3'}>{props.todoListTitle}&nbsp;
-                <button onClick={deleteTodoListHandler}>&#9762;</button>
+                <button onClick={deleteTodoListRequest}>&#9762;</button>
             </h3>
             <Input buttonText={'add'}
                    callBack={addTask}
@@ -63,6 +72,9 @@ export const TodoList: React.FC<propTypes> = (props) => {
                 taskListID={props.taskListID}
                 filter={props.filter}
             />
+            {modalWindow && <ModalWindow
+                message={`Delete ${props.todoListTitle}?`}
+                callBack={conformDelete}/>}
         </div>
     );
 };

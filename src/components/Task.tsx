@@ -16,12 +16,13 @@ export const Task: React.FC<propTypes> = ({task, changeStatus, todoListID, delet
         changeStatus(todoListID, id, isDone)
     }
 
+    function conformDelete(conform: boolean) {
+        conform && deleteTask(todoListID, id)
+        setModalWindow(false)
+    }
 
-
-    function deleteTaskButtonHandler() {
-
+    function deleteTaskRequest() {
         setModalWindow(true)
-        // deleteTask(todoListID, id)
     }
 
     return (
@@ -34,10 +35,10 @@ export const Task: React.FC<propTypes> = ({task, changeStatus, todoListID, delet
             </span>
             <button
                 children={<>&#10060;</>}
-                onClick={deleteTaskButtonHandler}
+                onClick={deleteTaskRequest}
             />
-            {modalWindow && <ModalWindow message={`Delete ${title}`}
-                                         callBack={deleteTaskButtonHandler}/>}
+            {modalWindow && <ModalWindow message={`Delete ${title} ?`}
+                                         callBack={conformDelete}/>}
         </div>
     );
 };

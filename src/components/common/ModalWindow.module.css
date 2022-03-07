@@ -45,6 +45,16 @@
 }
 
 .text {
+
     /*border: 1px solid black;*/
 /*max-width: 200px;*/
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.yes{
+    background-color: red;
+    color: white;
 }
