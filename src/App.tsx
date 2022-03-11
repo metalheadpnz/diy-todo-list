@@ -3,7 +3,6 @@ import './App.css';
 import {v1} from "uuid";
 import {TodoList} from "./components/TodoList";
 import {CreateTodoList} from "./components/CreateTodoList";
-import ModalWindow from "./components/common/ModalWindow";
 
 //types
 type todoList = {
@@ -112,7 +111,10 @@ function App() {
     }
 
     function deleteTask(todoListID: string, taskID: string) {
-        setTodoLists(todoLists.map(el => el.id === todoListID ? {...el, tasks: el.tasks.filter(t => t.id !== taskID)} : el))
+        setTodoLists(todoLists.map(el => el.id === todoListID ? {
+            ...el,
+            tasks: el.tasks.filter(t => t.id !== taskID)
+        } : el))
     }
 
     function deleteTodoList(todoListID: string) {
@@ -121,6 +123,7 @@ function App() {
 
     return (
         <div className='appWrap'>
+            <h1>Test GitHub</h1>
             <CreateTodoList
                 addNewTodoList={addNewTodoList}/>
             <div className={'todoListsWrapper'}>
